@@ -6,7 +6,7 @@ class DY01:
     Handles controlling of Solight DY01 sockets.
     """
 
-    def __init__(self, pi, pin, transmit_time = 0.5):
+    def __init__(self, pi, pin, transmit_time = 0.15):
         """
         Constructs the instance. Args:
         * pi - connection to pigpio daemon
@@ -68,15 +68,3 @@ class DY01:
         self.pi.wave_send_repeat(wid)
         time.sleep(self.transmit_time)
         self.pi.wave_tx_stop()
-
-# Example - blink
-if __name__ == "__main__":
-    dy01 = DY01(pigpio.pi(), 17)
-
-    socket = 1015
-
-    while True:
-        dy01.send(socket, 1);
-        time.sleep(1)
-        dy01.send(socket, 0);
-        time.sleep(1)
